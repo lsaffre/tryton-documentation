@@ -50,6 +50,13 @@ Setup a database
 This step is only necessary if you would like to work with a more powerful
 database engine like PostgreSQL or MySQL. To install such a database
 consult the :ref:`database-configuration` section.
+If all you want is to get started quickly on tryton and use SQLite as a database,
+add the following to your trytond.conf (normally /etc/trytond.conf)::
+
+    db_type = sqlite
+    data_path = /var/lib/trytond
+
+and make sure data_path is an existing directory
 
 Install Tryton
 --------------
@@ -62,7 +69,7 @@ You've got three easy options to install Tryton:
   distribute Tryton.
 * :ref:`Install an official release <install-official-release>`. This is the
   best approach for users who want a stable version number and aren’t concerned
-  about running a slightly older version of Django.
+  about running a slightly older version of Tryton.
 * :ref:`Install the latest development version <install-the-development-version>`. 
   This is best for users who want the latest-and-greatest features and aren’t
   afraid of running brand-new code.
