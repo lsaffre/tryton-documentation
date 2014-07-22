@@ -7,6 +7,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   quick_install
    installation
    access_management
    database_management
