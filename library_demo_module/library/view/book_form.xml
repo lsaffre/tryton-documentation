@@ -8,9 +8,7 @@ this repository contains the full copyright notices and license terms. -->
     <field name="isbn"/>
     <newline/>
     <label name="subject"/>
-    <field name="subject" colspan="3"/>
-    <label name="renter"/>
-    <field name="renter"/>
+    <field name="subject" colspan="5"/>
     <newline/>
     <label name="abstract"/>
     <field name="abstract" colspan="5"/>

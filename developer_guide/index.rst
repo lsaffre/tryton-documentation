@@ -6,6 +6,8 @@ Developer Guide
 
    getting_started
    basic_concepts
+   example_library_1
+   example_library_2
    how_to_get_help
 
 Advanced Concepts:
