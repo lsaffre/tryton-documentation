@@ -71,7 +71,8 @@ The most common options are:
 * Toolbar: Used to change the toolbar view. You can select to show only icons,
   only text and text and icons. The default value will show only icons.
 * Form: Used to change the view of the Tryton client. The following options
- are available:
+  are available:
+
     * Save Width/Height: If marked, the client will remember the width of the
       columns if you modify it.
     * Save Tree Status: If marked, the client will remember the opened nodes in
@@ -164,7 +165,7 @@ Name: Michael
 
 
 Operators
-``````````
+~~~~~~~~~
 
 The following operators can be used:
 
@@ -180,7 +181,7 @@ For example: Name: != Dwight
 
 
 Wildcards
-`````````
+~~~~~~~~~
 
 There are two wildcards:
 

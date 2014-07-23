@@ -54,7 +54,7 @@ Updating a field should trigger an update on a number of fields
 
     * define a function named on_change_<field_name>
     * return a dictionary containing 'field_name': value for all fields to be updated
-    * decorate the function with @fields.depends(*keys) containing all keys to be updated.
+    * decorate the function with @fields.depends(\*keys) containing all keys to be updated.
       this ensures that all required fields get submitted by the client.
 
 
@@ -76,7 +76,7 @@ Update a field each time a set of fields changes
 
     * define a function named on_change_with_<field_B_name>
     * return the fields new value
-    * decorate the function with @fields.depends(*keys) using all the keys that may influence the field
+    * decorate the function with @fields.depends(\*keys) using all the keys that may influence the field
 
 .. code-block:: python
 
@@ -131,6 +131,7 @@ Relational Fields
 
 Like any `ORM (Object Relational Mapper) <http://en.wikipedia.org/wiki/Object-relational_mapping>`_ Tryton offers relational fields, which enable you
 to connect model(s) to its related model(s). You can use any of these:
+
     - Many2Many - for example (Many) models can belong to a category but also to other (Many) categories
     - Many2One - Connect a set of (Many) models to a parent (One) (example: a company field in company.employee Model)
     - One2Many - A field representing (Many) connected model instances (example employees field in company.company model)
@@ -211,8 +212,8 @@ added.
 
 * expr : the xpath expression to find a node in the inherited view.
 * position : Define the position from the found node, it can be before,
-after, replace, inside or replace_attributes which will change the
-attributes.
+  after, replace, inside or replace_attributes which will change the
+  attributes.
 
 **Example**
 

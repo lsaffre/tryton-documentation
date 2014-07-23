@@ -8,6 +8,7 @@ tryton@googlegroups.com
 
 Most of the tryton community follows this mailing list. You will usually be
 able to find people willing to help you, provided you follow some simple rules:
+
  * Use english. There are language specific mailing lists, and posting in
    spanish or french on the standard mailing list will irritate and pollute
    those who do not understand the language.
@@ -42,6 +43,7 @@ All the conversations are archived and you can browse it on the tryton website.
 IRC is a great way to get support from the tryton community. People are usually
 responsive, and willing to help. Again, some rules are necessary for it to work
 properly:
+
  * Do not copy-paste huge chunks of text in the chat, it is annoying and makes
    it unreadable. Use an online temporary hosting for it like `Debian Paste`_
    or Pastebin_ is more

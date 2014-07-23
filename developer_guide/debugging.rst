@@ -25,6 +25,7 @@ The tryton server comes bundled with a few options to  make the debugging
 easier. Every developement server should have the following setting enabled in
 their configuration file:
 ::
+
     auto_reload = True
 
 This makes the server reload itself every time one of its resources (python
@@ -80,6 +81,7 @@ The tryton gtk client provides useful fonctionnalities for debugging: debug
 mode and verbose mode. Those are arguments on the command line of the tryton
 gtk client:
 ::
+
     tryton -d -v
 
 The debug mode force the client to fetch the definition of each view you want
@@ -98,6 +100,7 @@ server, and you got to know which one of those caused the crash. Enabling the
 verbose mode will make every request from the client to the server displayed in
 the server log this way:
 ::
+
     INFO:tryton.rpc:model.model_name.method_name(_, _, arg1, arg2, ..., context)
     DEBUG:tryton.rpc:something
 
@@ -143,7 +146,9 @@ Debug those annoying Error 500
 In the trytond/protocols/jsonrpc.py file, in SimpleJSONRPCDispatcher._marshaled_dispatch,
 you should enclose the 
 ::
+
     return json.dumps(response, cls=JSONEncoder)
+
 statement in a try / except + traceback + raise to know what really failed
 when you got an error 500 client side.
 
@@ -151,7 +156,8 @@ Know where functional errors where thrown
 -----------------------------------------
 Add those lines at the start of the raise_user_error method of the
 WarningErrorMixin class of the trytond/error.py:
-::   
+::
+
     import traceback
     traceback.print_stack()
     
@@ -163,6 +169,7 @@ Debug Functional Errors
 -----------------------
 Write
 ::
+
     print cls.__name__, field_name, value
     
 in ModelStorage._validate.required_test (modelstorage.py). This will give
@@ -170,7 +177,9 @@ you some info in case of "The field ... is required"
 
 Write
 ::
+
     print cls.__name__, field_name, value, test
+
 in ModelStorage._validate at the
 cls.raise_user_error('selection_validation_record') line. That way you will
 know why "The value ... is not in the selection"
@@ -179,6 +188,7 @@ How to deal with non-reproductible errors / client errors
 =========================================================
 Those are the worst thing you can encounter. The solution for debugging them is
 the same: consider you got only one go:
+
   * When the error occurs server-side and is not reproductible, the only 
     thing you can do is make it so that you get the maximum information out of
     it the few times it occurs.
