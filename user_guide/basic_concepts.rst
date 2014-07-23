@@ -8,7 +8,7 @@ of the Tryton client, the Tryton server and the Database management system
 (mainly PostgreSQL).
 
 Technical Features
------------------
+------------------
 The client and the server applications are written in Python, the client
 use GTK+ as graphical toolkit. Both are available on Linux, OS X.
 The kernel provides the technical foundations needed by the most
