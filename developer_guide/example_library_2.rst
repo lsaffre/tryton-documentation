@@ -1,19 +1,20 @@
 Tryton by example (2): library_rent
 ===================================
 
-In this section we are going to extend our book model by a new field to represent a party who currently
-rents the book from our library.
+Now that we have created a working library-module which gives us the possibility to store
+information about all our books, we might find ourselves in a situation where we want
+to rent those books out and keep track of our friends who currently hold them.
+Because we read our books from time to time we also want to know if its currently available
+or not.
 
 Field functions
 ---------------
 
-In tryton some of the fields properties are defined by special functions.
-These functions are always executed on the server, but they may be triggered from the client.
-
-Default values
-^^^^^^^^^^^^^^
-
-You can define default values for fields by adding a 'default_<field_name>' function to your model:
+As we already learned about trytons inheritance-model from :ref:`basic concepts<model-inheritance>`,
+we create a new module folder called 'library_rent' in the same structure as
+the one from last chapter, and we include 'library' as its dependency in tryton.cfg.
+We start by adding a simple :py:class:`~trytond.model.fields.char`
+field straight away (we don't know any better yet):
 
 .. code-block:: python
 
@@ -21,14 +22,21 @@ You can define default values for fields by adding a 'default_<field_name>' func
         __name__ = 'library.book'
         renter = fields.Char('Rented by')
 
-        def default_renter():
-            return 'me'
+Next thing is to find out if the book is available or not, but we don't want to manually set the
+state each time we rent out a book.
+Tryton has some handy field-functions to offer so we can automate this task.
+
+.. note::
+
+    Field-functions are always executed on the server, but they may also be triggered from the client.
+
 
 Field-Relationships
 ^^^^^^^^^^^^^^^^^^^
 
-If you have a pair of fields that influence each others value, you may define functions to update
-values when a change is detected.
+If you have a pair of fields that influence each others value, you can define functions to update
+the fields values whenever a change is detected.
+There is two use-cases for this:
 
 Updating a field should trigger an update on a number of fields
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -47,14 +55,14 @@ Updating a field should trigger an update on a number of fields
 
         @fields.depends('available')
         def on_change_renter(self):
-            if self.owner == 'me':
+            if self.renter:
                 return {'available': False}
             else:
                 return {'available': True}
 
 
-Update a field each time a set of fields changes
-""""""""""""""""""""""""""""""""""""""""""""""""
+Updating a set of fields should trigger an update on a single field
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     * define a function named on_change_with_<field_B_name>
     * return the fields new value
@@ -67,7 +75,7 @@ Update a field each time a set of fields changes
 
         @fields.depends('renter')
         def on_change_with_available(self):
-            return not self.renter == 'me'
+            return self.renter == ''
 
 .. note:: on_change_* and on_change_with_* are called from the client
 
@@ -75,8 +83,8 @@ Function fields
 ^^^^^^^^^^^^^^^
 
 The previous 'on_change_owner' example could have been solved without storing a new key
-to the database and calculating its value on the fly, by adding a function
-field:
+in the database by calculating its value on the fly.
+To achieve this we need to add a function field:
 
 .. code-block:: python
 
@@ -84,7 +92,7 @@ field:
         available = fields.Function(fields.Boolean('Available'), 'get_renter_information')
 
         def get_renter_information(self, name):
-            return not self.renter == 'me'
+            return self.renter == ''
 
 where name is the fields name.
 This special field can be accessed just as if it was a normal field
@@ -95,8 +103,8 @@ of the type specified but gets computed each time (on the server)
 Combining on_change with a Function field
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can combine the advantages of Function fields (no extra database-column) and
-on_change_* functions (updated in the client) by combining them:
+Now that we know about those concepts we can even have all the advantages of Function fields
+(no extra database-column) and on_change_* functions (updated in the client) by combining them:
 
 .. code-block:: python
 
@@ -105,14 +113,39 @@ on_change_* functions (updated in the client) by combining them:
 
         @fields.depends('renter')
         def on_change_with_available(self, name=None):
-            return self.renter == None
+            return self.renter == ''
 
+So we have that problem solved.
+
+Default values
+^^^^^^^^^^^^^^
+
+After a while, we recognize that whenever there is a new book in our library, we want to read it first.
+We don't want to rent it out by accident, so by default we should be the renter on a new library-entry.
+
+You can define default values for fields by adding a 'default_<field_name>' function to your model:
+
+.. code-block:: python
+
+    class Book:
+        __name__ = 'library.book'
+        renter = fields.Char('Rented by')
+
+        def default_renter():
+            return 'me'
 
 Relational Fields
 -----------------
 
-Like any ORM Tryton offers relational fields, which enable you
-to connect model(s) to its related model(s). You can use any of these:
+It turns out that actually there is a lot more than just a hand of forename-friends who want to rent
+our books, so we want to store a bit of additional information with our renters.
+We have a good run and find out that tryton already has a useful
+`Party Module <http://doc.tryton.org/3.2/modules/party/doc/index.html>`_ to offer,
+so all we have to do is to extend our book model by a new field to reference a party who currently
+rents the book from our library.
+
+Like any `ORM <http://en.wikipedia.org/wiki/Object-relational_mapping>`_ Tryton offers relational fields,
+which enable you to connect model(s) to its related model(s). You can use any of these:
 
     - Many2Many - for example (Many) models can belong to a category but also to other (Many) categories
     - Many2One - Connect a set of (Many) models to a parent (One) (example: a company field in company.employee Model)

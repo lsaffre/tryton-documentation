@@ -41,6 +41,8 @@ of a Pool() instance:
     Books = Pool().get('library.book')  # Model
     book_no_one = Books(1)  # Instance
 
+.. _model-inheritance:
+
 Model Inheritance
 ~~~~~~~~~~~~~~~~~
 
