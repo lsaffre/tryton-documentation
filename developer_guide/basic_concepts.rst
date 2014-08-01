@@ -69,6 +69,20 @@ and register the model to the pool (using a different module name)
         Company,
         module='company_something', type='model')
 
+Records
+~~~~~~~
+
+Most of trytons behaviour is itself defined by records of internal models (ir).
+All records are stored in the database and they can created within the client
+or statically predefined in xml files.
+When you are unsure about how to define the records, you are encouraged to explore the models
+in::
+
+    /trytond
+        /ir
+        /res
+
+
 
 Views
 -----
