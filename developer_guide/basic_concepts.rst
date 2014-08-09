@@ -20,7 +20,8 @@ Most likely your custom Model will inherit from ModelSql and ModelView at least,
 so it can be stored and viewed in the client.
 
 Each :py:class:`~trytond.model.ModelSQL` can hold a set of tryton-fields to represent its attributes.
-For a complete list of tryton fields you are refered to Trytond docs: :py:mod:`~trytond.model.fields`
+For a complete list of field types available on tryton you are refered to
+Trytond docs: :py:mod:`~trytond.model.fields`
 
 
 Pool
@@ -67,7 +68,7 @@ and register the model to the pool (using a different module name)
 
     Pool().register(
         Company,
-        module='company_something', type='model')
+        module='company_customized', type='model')
 
 Records
 ~~~~~~~
