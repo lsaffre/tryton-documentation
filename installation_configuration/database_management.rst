@@ -98,8 +98,8 @@ Restore a database
 ~~~~~~~~~~~~~~~~~~
 
 To restore a backup generated with the tryton client you must open your Tryton
-client and go to `File/Databases/Restore Database`. You will be prometed to
-entenr the name of the backup file you want to restore. Once the name is
+client and go to `File/Databases/Restore Database`. You will be promted to
+enter the name of the backup file you want to restore. Once the name is
 entered,  you will see a screen which displays the following details:
 
 .. figure:: images/tryton_restore.png
