@@ -235,7 +235,7 @@ added.
 
 Wizard
 ------------------------------------------------------------------
-A wizard is a fine state machine.
+A wizard is a finite state machine.
 
 :py:class:`~trytond.wizard.Wizard(session_id)`
 This is the base for any wizard. It contains the engine for the finite
