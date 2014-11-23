@@ -46,6 +46,11 @@ used to work on nested repositories. In order to install hgnested you must run:
 
   pip install hgnested
 
+don't forget to add the hgnested extension to your ```~/.hgrc```::
+
+    [extensions]
+    hgnested =
+
 Once installed you can checkout the lastest sources by executing:
 
 ::

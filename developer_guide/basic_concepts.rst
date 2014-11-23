@@ -141,6 +141,20 @@ added.
             </xpath>
         </data>
 
+Wizard
+------------------------------------------------------------------
+A wizard is a finite state machine.
+
+:py:class:`~trytond.wizard.Wizard(session_id)`
+This is the base for any wizard. It contains the engine for the finite
+state machine. A wizard must have some state instance attributes that the
+engine will use.
+
+
+Class attributes are:
+**Wizard.__name__**
+It contains the unique name to reference the wizard throughout the platform.
+
 
 Active Records
 --------------
