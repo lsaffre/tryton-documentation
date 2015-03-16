@@ -3,7 +3,7 @@ from trytond.model import fields, ModelSQL, ModelView
 
 # set __meta__ to use Trytons inheritance model
 __metaclass__ = PoolMeta
-__ALL__ = ['Book', 'Party']
+__ALL__ = ['Book']
 
 
 
@@ -18,14 +18,3 @@ class Book(ModelSQL, ModelView):
     isbn = fields.Char('ISBN')
     subject = fields.Char('Subject')
     abstract = fields.Text('Abstract')
-
-    # A relational field to point on (one) party
-    renter = fields.Many2One('party.party', 'Rented by')
-
-
-# Example for Tryton model-inheritance
-class Party:
-    __name__ = 'party.party'
-
-    # Reverse relation for book.renter (reference to all rented books)
-    rented_books = fields.One2Many('library.book', 'renter', 'Rented Books')

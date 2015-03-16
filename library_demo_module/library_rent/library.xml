@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<tryton>
+    <data>
+
+        <!-- First thing: define the report itself,
+        model: Target-Model
+        report_name: the report class' __name__
+        report: template ods-file
+        -->
+        <record model="ir.action.report" id="report_library">
+            <field name="name">Book</field>
+            <field name="model">library.book</field>
+            <field name="report_name">library.book</field>
+            <field name="report">library/book.odt</field>
+        </record>
+        <!-- Second we register a keyword
+        (so we can call the report from tryton client) -->
+        <record model="ir.action.keyword" id="report_library_book">
+            <field name="keyword">form_print</field>
+            <field name="model">library.book,-1</field>
+            <field name="action" ref="report_library"/>
+        </record>
+
+        <!-- also we want to add new fields to our book-views -->
+        <record model="ir.ui.view" id="library_view_tree">
+            <field name="model">library.book</field>
+            <field name="inherit" ref="library.library_view_tree"/>
+            <field name="name">book_tree</field>
+        </record>
+        <record model="ir.ui.view" id="library_view_form">
+        <field name="model">library.book</field>
+        <field name="inherit" ref="library.library_view_form"/>
+        <field name="name">book_form</field>
+    </record>
+
+    <!-- Add our wizard-->
+    <record model="ir.action.wizard" id="book_print">
+        <field name="name">Print Library Book</field>
+        <field name="wiz_name">library.print_report</field>
+    </record>
+    </data>
+</tryton>

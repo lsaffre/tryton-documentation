@@ -1,56 +1,44 @@
 <?xml version="1.0"?>
 <tryton>
     <data>
+        <!-- The main menuentry-->
         <menuitem name="Library" sequence="0" id="menu_library"/>
+
+        <!-- the action to open a window for model library.book -->
         <record model="ir.action.act_window" id="act_library_window">
             <field name="name">Books</field>
             <field name="res_model">library.book</field>
         </record>
+        <!-- Our submenu to run the previously defined action -->
         <menuitem name="Books" parent="menu_library" id="menu_books" action="act_library_window"/>
 
 
-        <record model="ir.ui.view" id="library_tree">
+        <!-- Defining views for our model library.book -->
+        <record model="ir.ui.view" id="library_view_tree">
             <field name="model">library.book</field>
             <field name="type">tree</field>
             <field name="name">book_tree</field>
         </record>
-        <record model="ir.ui.view" id="library_form">
+        <record model="ir.ui.view" id="library_view_form">
             <field name="model">library.book</field>
             <field name="type">form</field>
             <field name="name">book_form</field>
         </record>
 
-            <!--
-            <field name="domain"></field>
-            <field name="context"></field>
-            <field name="search_value"></field>-->
+        <!--
+        <field name="domain"></field>
+        <field name="context"></field>
+        <field name="search_value"></field>-->
         <record model="ir.action.act_window.view" id="act_library_view1">
             <field name="sequence" eval="10"/>
-            <field name="view" ref="library_tree"/>
+            <field name="view" ref="library_view_tree"/>
             <field name="act_window" ref="act_library_window"/>
         </record>
         <record model="ir.action.act_window.view" id="act_library_view2">
             <field name="sequence" eval="20"/>
-            <field name="view" ref="library_form"/>
+            <field name="view" ref="library_view_form"/>
             <field name="act_window" ref="act_library_window"/>
         </record>
-        <!-- First thing: define the report itself,
-        model: Target-Model
-        report_name: the report class' __name__
-        report: template ods-file
-        -->
-        <!--<record model="ir.action.report" id="report_library">
-            <field name="name">Book</field>
-            <field name="model">library.Book</field>
-            <field name="report_name">library.book</field>
-            <field name="report">library/book.odt</field>
-        </record>
-        <!- Second we register a keyword
-        (so we can call the report from tryton client) ->
-        <record model="ir.action.keyword" id="report_library_book">
-            <field name="keyword">form_print</field>
-            <field name="model">library.book,-1</field>
-            <field name="action" ref="report_library"/>
-        </record>-->
+
     </data>
 </tryton>
