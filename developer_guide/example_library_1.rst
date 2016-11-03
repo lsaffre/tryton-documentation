@@ -18,6 +18,7 @@ with the following structure::
         /tryton.cfg
         /__init__.py
         /library.py
+        /library.xml
         /view
             /book_form.xml
             /book_tree.xml
