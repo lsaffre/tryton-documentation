@@ -1,7 +1,7 @@
 Migration
 =========
 
-The migration between tryton versions is fully suported. In order to migrate
+The migration between tryton versions is fully supported. In order to migrate
 an existing database to a newer version you must take the following actions:
 
 1. Obtain the new version of trytond and all the instaled modules. You can
